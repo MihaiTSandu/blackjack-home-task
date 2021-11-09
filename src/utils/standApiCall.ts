@@ -10,8 +10,9 @@ headers: {
 },
 body: requestBody,
 });
+const data = await response.json();
 
-return response;
+return data;
 }
 
 export default standApiCall;

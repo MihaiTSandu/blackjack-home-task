@@ -11,7 +11,9 @@ const turnApiCall = async (details: any) => {
     body: requestBody,
     });
 
-return response;
+    const data = await response.json();
+  
+return data;
 }
 
 export default turnApiCall;

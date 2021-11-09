@@ -1,7 +1,11 @@
-import React from "react";
+import React, { FormEventHandler, MouseEventHandler } from "react";
 import styled from "styled-components";
 
-function BetAmountInput(props: any) {
+const BetAmountInput = (props: {
+  value: string;
+  onInput: FormEventHandler<HTMLInputElement>;
+  onClick: MouseEventHandler<HTMLButtonElement>;
+}) => {
   return (
     <>
       <StyledInput
@@ -15,12 +19,9 @@ function BetAmountInput(props: any) {
       <StyledInputButton onClick={props.onClick} type="button">
         SIT
       </StyledInputButton>
-      {props.availableBetOptions?.forEach((element: string) => {
-        <span>{element}</span>;
-      })}
     </>
   );
-}
+};
 
 export default BetAmountInput;
 

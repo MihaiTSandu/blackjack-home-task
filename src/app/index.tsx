@@ -1,12 +1,12 @@
 import React from "react";
 import GamePage from "./pages/GamePage";
 
-function App() {
+const App = () => {
   return (
     <>
       <GamePage />
     </>
   );
-}
+};
 
 export default App;

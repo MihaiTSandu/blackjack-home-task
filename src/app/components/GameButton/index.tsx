@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-function GameButton(props: any) {
+const GameButton = (props: any) => {
   return (
     <>
       <StyledButton onClick={props.onClick}>{props.name}</StyledButton>
     </>
   );
-}
+};
 
 export default GameButton;
 

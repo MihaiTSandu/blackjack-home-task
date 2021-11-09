@@ -11,8 +11,10 @@ const dealApiCall = async (details: any) => {
         },
         body: requestBody,
         });
+  
+  const data = await response.json();
     
-    return response;
+    return data;
 }
 
 export default dealApiCall;
