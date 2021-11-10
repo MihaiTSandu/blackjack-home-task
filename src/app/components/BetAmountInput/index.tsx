@@ -1,47 +1,65 @@
-import React, { FormEventHandler, MouseEventHandler } from "react";
+import React from "react";
 import styled from "styled-components";
+import Button from "../Button";
 
-const BetAmountInput = (props: {
-  value: string;
-  onInput: FormEventHandler<HTMLInputElement>;
-  onClick: MouseEventHandler<HTMLButtonElement>;
-}) => {
+const translations = {
+  inputPlaceHolder: "Bet amount (10 -1000)",
+  sit: "sit",
+};
+
+export interface BetAmountInputProps {
+  value: number | undefined;
+  onAmountChange: (amount: number) => void;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+const BetAmountInput = ({
+  value,
+  onAmountChange,
+  onClick,
+}: BetAmountInputProps) => {
   return (
-    <>
+    <Container>
       <StyledInput
         placeholder="Bet amount (10-1000)"
         type="number"
         max="1000"
         min="10"
-        value={props.value}
-        onInput={props.onInput}
+        value={value}
+        onInput={(event) => {
+          try {
+            onAmountChange(
+              parseInt((event.target as HTMLInputElement).value, 10)
+            );
+          } catch {
+            console.error("Could not parse bet amount input value");
+          }
+        }}
       />
-      <StyledInputButton onClick={props.onClick} type="button">
-        SIT
-      </StyledInputButton>
-    </>
+      <Button variant="primary" onClick={onClick} label={translations.sit} />
+    </Container>
   );
 };
 
 export default BetAmountInput;
 
-const StyledInput = styled.input`
-  background-color: black;
-  border-radius: 3rem;
-  color: gray;
-  font-size: 20pt;
-  padding: 1rem 1rem 1rem 1rem;
-
-  :focus {
-    outline: none;
-  }
+const Container = styled.div`
+  text-align: center;
 `;
 
-const StyledInputButton = styled.button`
-  background-color: #00ff00;
-  border-radius: 3rem;
-  font-size: 20pt;
-  font-weight: 800;
-  margin-left: 1rem;
-  padding: 1rem 1rem 1rem 1rem;
+const StyledInput = styled.input`
+  background-color: transparent;
+  border: 0;
+  border-bottom: 0.0625rem solid ${(prop) => prop.theme.border};
+  border-left: 0.1875 solid ${(prop) => prop.theme.primary};
+  color: ${(prop) => prop.theme.text};
+  font-size: 1.25rem;
+  padding: 0.75rem 1rem;
+  min-width: 15rem;
+  margin-right: 0.5rem;
+
+  :focus {
+    background: ${(prop) => prop.theme.backgroundFocus};
+    outline: none;
+  }
 `;
