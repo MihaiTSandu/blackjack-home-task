@@ -25,7 +25,7 @@ const BetAmountInput = ({
         type="number"
         max="1000"
         min="10"
-        value={value}
+        value={value || ""}
         onInput={(event) => {
           try {
             onAmountChange(

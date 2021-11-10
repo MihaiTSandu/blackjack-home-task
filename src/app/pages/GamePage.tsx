@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CardVisual from "react-free-playing-cards";
 import styled, { css } from "styled-components";
+import { v4 as uuidv4 } from "uuid";
 import { deal, sit, stand, turn, TurnAction } from "../../utils/api";
 import { Card } from "../../utils/interface";
 import BetAmountInput from "../components/BetAmountInput";
@@ -51,13 +52,12 @@ export default function GamePage() {
   const dealButtonClick = async () => {
     if (sessionId) {
       try {
-        const {
-          playerCards: player,
-          dealerCards: dealer,
-          roundEnded,
-        } = await deal(betAmount || 0, sessionId);
-        setDealerCards([...dealerCards, ...dealer]);
-        setPlayerCards([...playerCards, ...player]);
+        const { playerCards, dealerCards, roundEnded } = await deal(
+          betAmount || 0,
+          sessionId
+        );
+        setDealerCards(dealerCards);
+        setPlayerCards(playerCards);
         setRoundEnded(roundEnded);
       } catch (error) {
         alert(error);
@@ -80,13 +80,9 @@ export default function GamePage() {
           setWinAmount(winAmount);
           setCurrentBalance(currentBalance);
         } else {
-          const {
-            dealerCards: dealer,
-            roundEnded,
-            winAmount,
-            currentBalance,
-          } = await turn(action, sessionId);
-          setDealerCards([...dealerCards, ...dealer]);
+          const { dealerCards, roundEnded, winAmount, currentBalance } =
+            await turn(action, sessionId);
+          setDealerCards(dealerCards);
           setRoundEnded(roundEnded);
           setWinAmount(winAmount);
           setCurrentBalance(currentBalance);
@@ -145,8 +141,10 @@ export default function GamePage() {
         <Cards>
           {dealerCards.map((card) => (
             <CardVisual
-              key={`${card.rank} ${card.suite}`}
-              card={`${card.rank}${card.suite[0].toLowerCase()}`}
+              key={uuidv4()}
+              card={`${
+                card.rank.toString() === "10" ? "T" : card.rank
+              }${card.suite[0].toLowerCase()}`}
               height="128px"
             />
           ))}
@@ -156,8 +154,10 @@ export default function GamePage() {
         <Cards>
           {playerCards.map((card) => (
             <CardVisual
-              key={`${card.rank} ${card.suite}`}
-              card={`${card.rank}${card.suite[0].toLowerCase()}`}
+              key={uuidv4()}
+              card={`${
+                card.rank.toString() === "10" ? "T" : card.rank
+              }${card.suite[0].toLowerCase()}`}
               height="128px"
             />
           ))}
