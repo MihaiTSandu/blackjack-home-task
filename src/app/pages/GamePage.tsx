@@ -22,6 +22,7 @@ export default function GamePage() {
   const [betAmount, setBetAmount] = useState<number>();
   const [playerCards, setPlayerCards] = useState<Array<Card>>([]);
   const [dealerCards, setDealerCards] = useState<Array<Card>>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [roundEnded, setRoundEnded] = useState(false);
   const [winAmount, setWinAmount] = useState<number>();
   const [currentBalance, setCurrentBalance] = useState<number>();
