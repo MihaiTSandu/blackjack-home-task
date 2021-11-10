@@ -1,6 +1,7 @@
 {
   "name": "take-home-blackjack",
   "version": "0.1.0",
+  "author": "Mihai Sandu",
   "private": true,
   "scripts": {
     "build": "react-scripts build",
