@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "/blackjack-home-task/static/js/main.df9e4068.chunk.js",
-    "main.js.map": "/blackjack-home-task/static/js/main.df9e4068.chunk.js.map",
+    "main.js": "/blackjack-home-task/static/js/main.1e7ee739.chunk.js",
+    "main.js.map": "/blackjack-home-task/static/js/main.1e7ee739.chunk.js.map",
     "runtime-main.js": "/blackjack-home-task/static/js/runtime-main.d38afb67.js",
     "runtime-main.js.map": "/blackjack-home-task/static/js/runtime-main.d38afb67.js.map",
-    "static/js/2.0b083bee.chunk.js": "/blackjack-home-task/static/js/2.0b083bee.chunk.js",
-    "static/js/2.0b083bee.chunk.js.map": "/blackjack-home-task/static/js/2.0b083bee.chunk.js.map",
+    "static/js/2.ad120e3c.chunk.js": "/blackjack-home-task/static/js/2.ad120e3c.chunk.js",
+    "static/js/2.ad120e3c.chunk.js.map": "/blackjack-home-task/static/js/2.ad120e3c.chunk.js.map",
     "index.html": "/blackjack-home-task/index.html",
-    "static/js/2.0b083bee.chunk.js.LICENSE.txt": "/blackjack-home-task/static/js/2.0b083bee.chunk.js.LICENSE.txt"
+    "static/js/2.ad120e3c.chunk.js.LICENSE.txt": "/blackjack-home-task/static/js/2.ad120e3c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.d38afb67.js",
-    "static/js/2.0b083bee.chunk.js",
-    "static/js/main.df9e4068.chunk.js"
+    "static/js/2.ad120e3c.chunk.js",
+    "static/js/main.1e7ee739.chunk.js"
   ]
 }
