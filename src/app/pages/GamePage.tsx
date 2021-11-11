@@ -11,6 +11,10 @@ const translations = {
   title: "Blackjack",
   sitRequirement: "You must first sit at a table!",
   betRange: "Must place a bet between 10 and 1000",
+  winAmount: "Win Amount",
+  roundEnded: "Round Ended",
+  roundsPlayed: "Rounds Played",
+  balanceChange: "Balance Change",
 };
 
 export default function GamePage() {
@@ -26,6 +30,8 @@ export default function GamePage() {
   const [roundEnded, setRoundEnded] = useState(false);
   const [winAmount, setWinAmount] = useState<number>();
   const [currentBalance, setCurrentBalance] = useState<number>();
+  const [totalWin, setTotalWin] = useState<number>();
+  const [roundsPlayed, setRoundsPlayed] = useState<number>();
 
   const sitButtonClick = async () => {
     if (balance === 0 || balance! < 10 || balance! > 1000) {
@@ -33,9 +39,12 @@ export default function GamePage() {
     } else {
       try {
         const { availableBetOptions, sessionId } = await sit(balance!);
+        setCurrentBalance(balance);
         setSessionId(sessionId);
         setAvailableBetOptions(availableBetOptions);
         setBetAmount(betAmount);
+        setTotalWin(undefined);
+        setRoundsPlayed(undefined);
       } catch (error) {
         alert(error);
       }
@@ -44,7 +53,18 @@ export default function GamePage() {
 
   const standButtonClick = async () => {
     if (sessionId) {
-      await stand(sessionId);
+      try {
+        const { winAmount: totalWin, roundsPlayed } = await stand(sessionId);
+        setTotalWin(totalWin);
+        setRoundsPlayed(roundsPlayed);
+        setAvailableBetOptions([]);
+        setDealerCards([]);
+        setPlayerCards([]);
+        setRoundEnded(false);
+        setCurrentBalance(undefined);
+      } catch (error) {
+        alert(error);
+      }
     } else {
       alert(translations.sitRequirement);
     }
@@ -72,10 +92,12 @@ export default function GamePage() {
     if (sessionId) {
       try {
         if (action === "hit") {
-          const { playerCard: player, roundEnded } = await turn(
-            action,
-            sessionId
-          );
+          const {
+            playerCard: player,
+            roundEnded,
+            currentBalance,
+            winAmount,
+          } = await turn(action, sessionId);
           setPlayerCards([...playerCards!, player!]);
           setRoundEnded(roundEnded);
           setWinAmount(winAmount);
@@ -125,6 +147,8 @@ export default function GamePage() {
         <Button variant="secondary" onClick={standButtonClick} label="Stand" />
       </Actions>
 
+      {currentBalance && <h2>Available money {currentBalance}</h2>}
+
       <Options>
         {availableBetOptions.map((option) => (
           <OptionButton
@@ -163,6 +187,26 @@ export default function GamePage() {
             />
           ))}
         </Cards>
+        {roundEnded && (
+          <h2>
+            {translations.roundEnded}. {translations.balanceChange}{" "}
+            {winAmount! < 1 ? (
+              <span> {winAmount}</span>
+            ) : (
+              <span> +{winAmount}</span>
+            )}
+          </h2>
+        )}
+        {totalWin && (
+          <h2>
+            {translations.winAmount} {totalWin}
+          </h2>
+        )}
+        {roundsPlayed && (
+          <h2>
+            {translations.roundsPlayed} {roundsPlayed}
+          </h2>
+        )}
       </Table>
     </Container>
   );
