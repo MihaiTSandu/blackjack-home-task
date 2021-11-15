@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/blackjack-home-task/static/js/main.1e7ee739.chunk.js",
-    "main.js.map": "/blackjack-home-task/static/js/main.1e7ee739.chunk.js.map",
+    "main.js": "/blackjack-home-task/static/js/main.3ba0d3df.chunk.js",
+    "main.js.map": "/blackjack-home-task/static/js/main.3ba0d3df.chunk.js.map",
     "runtime-main.js": "/blackjack-home-task/static/js/runtime-main.d38afb67.js",
     "runtime-main.js.map": "/blackjack-home-task/static/js/runtime-main.d38afb67.js.map",
     "static/js/2.ad120e3c.chunk.js": "/blackjack-home-task/static/js/2.ad120e3c.chunk.js",
@@ -12,6 +12,6 @@
   "entrypoints": [
     "static/js/runtime-main.d38afb67.js",
     "static/js/2.ad120e3c.chunk.js",
-    "static/js/main.1e7ee739.chunk.js"
+    "static/js/main.3ba0d3df.chunk.js"
   ]
 }
