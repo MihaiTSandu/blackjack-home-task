@@ -5,6 +5,7 @@ import Button from "../Button";
 const translations = {
   inputPlaceHolder: "Bet amount (10 -1000)",
   sit: "sit",
+  parseIntError: "Could not parse bet amount input value",
 };
 
 export interface BetAmountInputProps {
@@ -22,7 +23,7 @@ const BetAmountInput = ({
     <Container data-testid="betAmountInput">
       <StyledInput
         data-testid="betInput"
-        placeholder="Bet amount (10-1000)"
+        placeholder={translations.inputPlaceHolder}
         type="number"
         max="1000"
         min="10"
@@ -33,7 +34,7 @@ const BetAmountInput = ({
               parseInt((event.target as HTMLInputElement).value, 10)
             );
           } catch {
-            console.error("Could not parse bet amount input value");
+            console.error(translations.parseIntError);
           }
         }}
       />
