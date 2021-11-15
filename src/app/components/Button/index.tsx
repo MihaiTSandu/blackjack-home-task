@@ -9,7 +9,12 @@ export interface ButtonProps {
 
 const Button = ({ onClick, label, variant = "primary" }: ButtonProps) => {
   return (
-    <StyledButton variant={variant} type="button" onClick={onClick}>
+    <StyledButton
+      data-testid={"button"}
+      variant={variant}
+      type="button"
+      onClick={onClick}
+    >
       {label}
     </StyledButton>
   );

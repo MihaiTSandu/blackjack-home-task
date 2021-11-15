@@ -19,8 +19,9 @@ const BetAmountInput = ({
   onClick,
 }: BetAmountInputProps) => {
   return (
-    <Container>
+    <Container data-testid="betAmountInput">
       <StyledInput
+        data-testid="betInput"
         placeholder="Bet amount (10-1000)"
         type="number"
         max="1000"
@@ -36,7 +37,12 @@ const BetAmountInput = ({
           }
         }}
       />
-      <Button variant="primary" onClick={onClick} label={translations.sit} />
+      <Button
+        data-testid="button"
+        variant="primary"
+        onClick={onClick}
+        label={translations.sit}
+      />
     </Container>
   );
 };

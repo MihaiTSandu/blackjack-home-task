@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import CardVisual from "react-free-playing-cards";
 import styled, { css } from "styled-components";
 import { v4 as uuidv4 } from "uuid";
-import { deal, sit, stand, turn, TurnAction } from "../../utils/api";
-import { Card } from "../../utils/interface";
-import BetAmountInput from "../components/BetAmountInput";
-import Button from "../components/Button";
+import { deal, sit, stand, turn, TurnAction } from "../../../utils/api";
+import { Card } from "../../../utils/interface";
+import BetAmountInput from "../../components/BetAmountInput";
+import Button from "../../components/Button";
 
 const translations = {
   title: "Blackjack",
@@ -15,6 +15,10 @@ const translations = {
   roundEnded: "Round Ended",
   roundsPlayed: "Rounds Played",
   balanceChange: "Balance Change",
+  stayButton: "Stay",
+  hitButton: "Hit",
+  standButton: "Stand",
+  dealButton: "Deal",
 };
 
 export default function GamePage() {
@@ -26,7 +30,6 @@ export default function GamePage() {
   const [betAmount, setBetAmount] = useState<number>();
   const [playerCards, setPlayerCards] = useState<Array<Card>>([]);
   const [dealerCards, setDealerCards] = useState<Array<Card>>([]);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [roundEnded, setRoundEnded] = useState(false);
   const [winAmount, setWinAmount] = useState<number>();
   const [currentBalance, setCurrentBalance] = useState<number>();
@@ -119,7 +122,7 @@ export default function GamePage() {
   };
 
   return (
-    <Container>
+    <Container data-testid="gamePage">
       <Header>{translations.title}</Header>
 
       <BetAmountInput
@@ -129,22 +132,30 @@ export default function GamePage() {
       />
 
       <Actions>
-        <Button variant="secondary" onClick={dealButtonClick} label="Deal" />
+        <Button
+          variant="secondary"
+          onClick={dealButtonClick}
+          label={translations.dealButton}
+        />
         <Button
           variant="secondary"
           onClick={() => {
             turnButtonClick("hit");
           }}
-          label="Hit"
+          label={translations.hitButton}
         />
         <Button
           variant="secondary"
           onClick={() => {
             turnButtonClick("stay");
           }}
-          label="Stay"
+          label={translations.stayButton}
         />
-        <Button variant="secondary" onClick={standButtonClick} label="Stand" />
+        <Button
+          variant="secondary"
+          onClick={standButtonClick}
+          label={translations.standButton}
+        />
       </Actions>
 
       {currentBalance && <h2>Available money {currentBalance}</h2>}
